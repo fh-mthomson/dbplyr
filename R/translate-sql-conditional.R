@@ -87,7 +87,7 @@ sql_if <- function(cond, if_true, if_false = quo(NULL), missing = quo(NULL)) {
   enpared_missing <- enpar(missing)
   con <- sql_current_con()
 
-  out <- "CASE WHEN {.val as.characte(enpared_cond)} THEN {.val as.character(enpared_if_true)}"
+  out <- "CASE WHEN {.val escape(enpared_cond, con = sql_current_con()))} THEN {.val escape(enpared_if_true, con = sql_current_con()))}"
 
   # `ifelse()` and `if_else()` have a three value logic: they return `NA` resp.
   # `missing` if `cond` is `NA`. To get the same in SQL it is necessary to
